@@ -9,6 +9,7 @@ Additionally, it serves as an experimental platform to apply and understand the 
 - **Golang**: The language to be used in this project in order to develop the API.
 - **Postgres**: The database used to manage entities inside the API.
 - **Docker**: Will be used to structure the database and the application inside containers for better execution and modularity.
+- **GitHub Actions**: Used to verify, build and upload artifacts automatically as developers interacts with the project.
 
 # System Diagram
 <p align="center">
