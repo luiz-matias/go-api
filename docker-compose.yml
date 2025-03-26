@@ -1,4 +1,12 @@
 services:
+  go_api:
+    container_name: go_api
+    image: go_api
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - go_db
   go_db:
     container_name: go_db
     image: postgres
