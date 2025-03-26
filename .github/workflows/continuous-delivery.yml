@@ -22,7 +22,7 @@ jobs:
     - name: Build app
       run: go build -v cmd/main.go
     - name: Upload artifact
-    - uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
         name: go-app.zip
       path: |
