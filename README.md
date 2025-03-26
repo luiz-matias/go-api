@@ -12,5 +12,5 @@ Additionally, it serves as an experimental platform to apply and understand the 
 
 # System Diagram
 <p align="center">
-  <img src="readme-images/diagram.png" alt="System Diagram" height="400"/>
+  <img src=".readme-images/diagram.png" alt="System Diagram" height="400"/>
 </p>
