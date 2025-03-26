@@ -1,0 +1,30 @@
+name: Continuous Delivery
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  deliver:
+    name: Build Delivery
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup golang
+      uses: actions/setup-go@v4
+      with:
+        go-version: stable
+    - name: Build app
+      run: go build -v cmd/main.go
+    - name: Upload artifact
+    - uses: actions/upload-artifact@v4
+      with:
+        name: go-app.zip
+      path: |
+        ./
+        !./main
