@@ -26,9 +26,6 @@ jobs:
       with:
         name: go-app
         path: |
-          ./main
-          ./README.md
-          ./.readme-images/diagram.png
-          ./.env.example
-          !./
+          main
+          .env.example
           
