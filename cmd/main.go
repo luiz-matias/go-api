@@ -41,5 +41,9 @@ func main() {
 	// Routes Configuration
 	route.ConfigureProductRoutes(server, &productController)
 
-	server.Run(":" + os.Getenv("API_PORT"))
+	err = server.Run(":" + os.Getenv("API_PORT"))
+
+	if err != nil {
+		panic("Error when starting server: " + err.Error())
+	}
 }

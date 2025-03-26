@@ -58,7 +58,11 @@ func (p *ProductRepository) GetProducts() ([]model.Product, error) {
 
 		productList = append(productList, productObject)
 	}
-	rows.Close()
+	err = rows.Close()
+
+	if err != nil {
+		return []model.Product{}, err
+	}
 
 	if productList == nil {
 		return []model.Product{}, nil

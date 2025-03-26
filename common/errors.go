@@ -18,11 +18,7 @@ func HandleError(ctx *gin.Context, err error) {
 	var statusCode int
 	var message string
 	var stacktrace string
-	shouldShowStacktrace := true
-
-	if os.Getenv("MODE") == "release" {
-		shouldShowStacktrace = false
-	}
+	shouldShowStacktrace := os.Getenv("MODE") != "release"
 
 	switch err {
 	case ErrResourceNotFound:

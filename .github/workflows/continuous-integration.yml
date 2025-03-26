@@ -1,0 +1,40 @@
+name: Continuous Integration
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  golangci:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup golang
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Lint check
+        uses: golangci/golangci-lint-action@v7
+        with:
+          version: v2.0
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup golang
+      uses: actions/setup-go@v4
+      with:
+        go-version: stable
+    - name: Build app
+      run: go build -v cmd/main.go
+#    - name: Test
+#      run: go test -v cmd/main.go
