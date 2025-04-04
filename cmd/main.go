@@ -39,6 +39,7 @@ func main() {
 	productController := controller.NewProductController(productUseCase)
 
 	// Routes Configuration
+	route.ConfigureHealthRoutes(server)
 	route.ConfigureProductRoutes(server, &productController)
 
 	err = server.Run(":" + os.Getenv("API_PORT"))
