@@ -24,8 +24,6 @@ func GetConnection() *sql.DB {
 		name,
 	)
 
-	fmt.Println(psqlInformation)
-
 	db, err := sql.Open(driver, psqlInformation)
 
 	if err != nil {
