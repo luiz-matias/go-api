@@ -49,3 +49,13 @@ jobs:
       with:
         push: true
         tags: luizmatias/go-api:latest
+  discord-alert:
+    name: Run Discord Webhook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Send Discord Alert
+        uses: johnnyhuy/actions-discord-git-webhook@main
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
