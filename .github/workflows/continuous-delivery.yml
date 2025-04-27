@@ -58,7 +58,7 @@ jobs:
         push: true
         tags: luizmatias/go-api:latest
   discord-alert:
-    if: ${{ always() }}
+    if: always()
     needs: [deliver, docker]
     name: Run Discord Webhook
     runs-on: ubuntu-latest
@@ -66,4 +66,5 @@ jobs:
       - name: Send message
         uses: sarisia/actions-status-discord@v1
         with:
+          status: ${{ needs.deliver.result }}
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
