@@ -21,6 +21,13 @@ jobs:
         go-version: stable
     - name: Build app
       run: go build -v cmd/main.go
+    - name: Test app
+      run: go test -json > test-results.json
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: test-results.json
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
