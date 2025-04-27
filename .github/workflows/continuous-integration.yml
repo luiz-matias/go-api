@@ -62,11 +62,12 @@ jobs:
         tags: luizmatias/go-api:latest
   discord-alert:
     name: Run Discord Webhook
-    if: ${{ always() }}
+    if: always()
     needs: [golangci, build, docker]
     runs-on: ubuntu-latest
     steps:
       - name: Send message
         uses: sarisia/actions-status-discord@v1
         with:
+          status: ${{ needs.build.result }}
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
