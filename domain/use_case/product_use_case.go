@@ -15,14 +15,22 @@ func NewProductUseCase(repository repository.ProductRepository) ProductUseCase {
 	}
 }
 
-func (productService *ProductUseCase) GetProducts() ([]model.Product, error) {
-	return productService.repository.GetProducts()
+func (productUseCase *ProductUseCase) GetProducts() ([]model.Product, error) {
+	return productUseCase.repository.GetProducts()
 }
 
-func (productService *ProductUseCase) GetProductByID(productId int) (*model.Product, error) {
-	return productService.repository.GetProduct(productId)
+func (productUseCase *ProductUseCase) GetProductByID(productId int) (*model.Product, error) {
+	return productUseCase.repository.GetProduct(productId)
 }
 
-func (productService *ProductUseCase) CreateProduct(product model.Product) (*model.Product, error) {
-	return productService.repository.SaveProduct(&product)
+func (productUseCase *ProductUseCase) CreateProduct(product model.Product) (*model.Product, error) {
+	return productUseCase.repository.SaveProduct(&product)
+}
+
+func (productUseCase *ProductUseCase) UpdateProduct(productId int, product model.Product) (*model.Product, error) {
+	return productUseCase.repository.UpdateProduct(productId, &product)
+}
+
+func (productUseCase *ProductUseCase) DeleteProduct(productId int) error {
+	return productUseCase.repository.DeleteProduct(productId)
 }
