@@ -55,7 +55,8 @@ jobs:
     name: Run Discord Webhook
     runs-on: ubuntu-latest
     steps:
-      - name: send message
+      - name: Send message
         uses: appleboy/discord-action@v1.2.0
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: ${{ github.actor }} pushed a new commit to ${{ github.ref }}'s Pull Request.
