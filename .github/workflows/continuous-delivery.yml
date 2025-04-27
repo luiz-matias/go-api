@@ -53,9 +53,7 @@ jobs:
     name: Run Discord Webhook
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Send Discord Alert
-        uses: johnnyhuy/actions-discord-git-webhook@main
+      - name: Send message
+        uses: appleboy/discord-action@v1.2.0
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
