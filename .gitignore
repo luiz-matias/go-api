@@ -11,6 +11,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Test results file, build with `go test test/* -json > test-results.json`
+test-results.json
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 

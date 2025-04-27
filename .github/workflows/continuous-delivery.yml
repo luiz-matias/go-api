@@ -21,6 +21,13 @@ jobs:
         go-version: stable
     - name: Build app
       run: go build -v cmd/main.go
+    - name: Test app
+      run: go test test/* -json > test-results.json
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: test-results.json
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
@@ -30,6 +37,7 @@ jobs:
           main
           .env.example
   docker:
+    needs: deliver
     name: Upload to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -50,11 +58,13 @@ jobs:
         push: true
         tags: luizmatias/go-api:latest
   discord-alert:
+    if: always()
+    needs: [deliver, docker]
     name: Run Discord Webhook
     runs-on: ubuntu-latest
     steps:
       - name: Send message
         uses: sarisia/actions-status-discord@v1
-        if: always()
         with:
+          status: ${{ needs.deliver.result }}
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
