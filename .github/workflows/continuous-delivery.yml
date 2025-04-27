@@ -49,3 +49,12 @@ jobs:
       with:
         push: true
         tags: luizmatias/go-api:latest
+  discord-alert:
+    name: Run Discord Webhook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message
+        uses: appleboy/discord-action@v1.2.0
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: "NEW PUSH TO MASTER: ${{ github.actor }} pushed a new commit to ${{ github.ref }}."
