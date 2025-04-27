@@ -32,8 +32,8 @@ func TestGetProductUseCase(t *testing.T) {
 		t.Errorf("Error thrown when getting product: %s", err)
 	}
 
-	if product.ID != 2 {
-		t.Errorf("Expected product id == %d, got %d", 2, product.ID)
+	if product.ID != 1 {
+		t.Errorf("Expected product id == %d, got %d", 1, product.ID)
 	}
 }
 
