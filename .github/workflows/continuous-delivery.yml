@@ -22,7 +22,7 @@ jobs:
     - name: Build app
       run: go build -v cmd/main.go
     - name: Test app
-      run: go test -json > test-results.json
+      run: go test test/* -json > test-results.json
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
