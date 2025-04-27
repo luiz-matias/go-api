@@ -25,7 +25,8 @@ jobs:
         with:
           version: v2.0
   build:
-    name: Build
+    needs: golangci
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -44,6 +45,7 @@ jobs:
         name: test-results
         path: test-results.json
   docker:
+    needs: build
     name: Build Docker Image
     runs-on: ubuntu-latest
     steps:
@@ -60,10 +62,11 @@ jobs:
         tags: luizmatias/go-api:latest
   discord-alert:
     name: Run Discord Webhook
+    if: ${{ always() }}
+    needs: [golangci, build, docker]
     runs-on: ubuntu-latest
     steps:
       - name: Send message
         uses: sarisia/actions-status-discord@v1
-        if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}

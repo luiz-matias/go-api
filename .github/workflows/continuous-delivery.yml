@@ -37,6 +37,7 @@ jobs:
           main
           .env.example
   docker:
+    needs: deliver
     name: Upload to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -57,11 +58,12 @@ jobs:
         push: true
         tags: luizmatias/go-api:latest
   discord-alert:
+    if: ${{ always() }}
+    needs: [deliver, docker]
     name: Run Discord Webhook
     runs-on: ubuntu-latest
     steps:
       - name: Send message
         uses: sarisia/actions-status-discord@v1
-        if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
