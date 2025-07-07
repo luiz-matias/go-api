@@ -14,7 +14,7 @@ func ConfigureHealthRoutes(server *gin.Engine) {
 	})
 	server.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
-			"message": "Hello World!",
+			"message": "Hello World from server 2!",
 		})
 	})
 }
