@@ -1,7 +1,6 @@
 package route
 
 import (
-	"go-api/api/controller"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,10 +12,9 @@ func ConfigureHealthRoutes(server *gin.Engine) {
 			"status": "UP",
 		})
 	})
-}
-
-func ConfigureProductRoutes(server *gin.Engine, controller *controller.ProductController) {
-	server.GET("/products/:id", controller.GetProduct)
-	server.GET("/products", controller.GetProducts)
-	server.POST("/products", controller.CreateProduct)
+	server.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "Hello World!",
+		})
+	})
 }

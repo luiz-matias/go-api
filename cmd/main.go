@@ -2,11 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-api/api/controller"
 	"go-api/api/route"
-	"go-api/domain/use_case"
-	"go-api/infra/db"
-	"go-api/infra/repository"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -30,17 +26,8 @@ func main() {
 	}
 	server := gin.Default()
 
-	// Database Initialization
-	dbConnection := db.GetConnection()
-
-	// Dependency Injection
-	productRepository := repository.NewProductRepository(dbConnection)
-	productUseCase := use_case.NewProductUseCase(productRepository)
-	productController := controller.NewProductController(productUseCase)
-
 	// Routes Configuration
 	route.ConfigureHealthRoutes(server)
-	route.ConfigureProductRoutes(server, &productController)
 
 	err = server.Run(":" + os.Getenv("API_PORT"))
 
